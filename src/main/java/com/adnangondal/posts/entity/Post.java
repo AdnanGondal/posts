@@ -37,6 +37,7 @@ public class Post {
   @Column(nullable = false)
   private LocalDateTime createdDate;
 
+  @Column(nullable = true)
   private LocalDateTime updatedDate;
 
   @OneToMany(mappedBy = "post")
