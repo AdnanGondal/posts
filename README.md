@@ -5,7 +5,7 @@ In the future this will be part of a bigger microservices project.
 
 Currently exposing the following API endpoints:
 
-POST /api/v1/post
+POST /api/v1/post/{userID}
 
 GET /api/v1/posts
 

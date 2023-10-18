@@ -1,48 +1,45 @@
-package com.adnangondal.posts.entities;
+package com.adnangondal.posts.entity;
 
 
-import com.adnangondal.posts.model.Status;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Reaction {
+public class Post {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @Column(nullable = false)
-  private Long user_id;
-
-  @ManyToOne
-  @JoinColumn(name = "post_id")
-  private Post post;
+  private String userId;
 
   @Column(nullable = false)
-  @Enumerated(EnumType.STRING)
-  private Status status;
+  private String content;
+
+  @Column(nullable = true)
+  private String imageUrl;
 
   @Column(nullable = false)
   private LocalDateTime createdDate;
 
   private LocalDateTime updatedDate;
+
+  @OneToMany(mappedBy = "post")
+  private List<Reaction> reaction;
 
 }
