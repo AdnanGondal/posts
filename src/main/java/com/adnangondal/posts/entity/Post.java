@@ -10,8 +10,10 @@ import jakarta.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -19,6 +21,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Post {
 
   @Id
@@ -26,7 +29,7 @@ public class Post {
   private Long id;
 
   @Column(nullable = false)
-  private String userId;
+  private Long userId;
 
   @Column(nullable = false)
   private String content;
@@ -42,5 +45,4 @@ public class Post {
 
   @OneToMany(mappedBy = "post")
   private List<Reaction> reaction;
-
 }
