@@ -4,10 +4,11 @@ import com.adnangondal.posts.entity.Post;
 import java.util.List;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Singular;
 
 @Data
-@Builder
+@NoArgsConstructor
 public class PostsResponseModel {
 
   @Singular

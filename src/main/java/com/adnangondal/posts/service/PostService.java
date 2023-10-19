@@ -22,10 +22,9 @@ public class PostService {
   }
 
   public PostsResponseModel getAllPosts() {
-    return PostsResponseModel
-        .builder()
-        .posts(postRepository.findAll())
-        .build();
+   PostsResponseModel response = new PostsResponseModel();
+   response.setPosts(postRepository.findAll());
+   return response;
   }
 
 }
