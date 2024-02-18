@@ -1,10 +1,10 @@
 package com.adnangondal.posts.controller;
 
-import com.adnangondal.posts.entity.Post;
 import com.adnangondal.posts.model.NewPostRequest;
 import com.adnangondal.posts.model.PostsResponseModel;
 import com.adnangondal.posts.service.PostService;
-import java.util.List;
+
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ public class PostsController {
   @PostMapping("/posts/user/{userId}")
   public ResponseEntity<Long> createPost(
       @PathVariable Long userId,
-      @RequestBody NewPostRequest request) {
+      @Valid @RequestBody NewPostRequest request) {
 
     Long postId = postService.createPost(request, userId);
 
@@ -35,6 +35,12 @@ public class PostsController {
   @GetMapping("/posts")
   public ResponseEntity<PostsResponseModel> getPosts(){
     PostsResponseModel posts = postService.getAllPosts();
+    return new ResponseEntity<>(posts, HttpStatus.OK);
+  }
+
+  @GetMapping("/posts/user/{userId}")
+  public ResponseEntity<PostsResponseModel> getPostsByUserId(@PathVariable("userId") Long userId){
+    PostsResponseModel posts = postService.getPostsByUserId(userId);
     return new ResponseEntity<>(posts, HttpStatus.OK);
   }
 
