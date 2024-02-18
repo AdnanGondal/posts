@@ -6,12 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.adnangondal.posts.config.IntegrationTestConfig;
 import com.adnangondal.posts.entity.Post;
+import com.adnangondal.posts.model.NewPostRequest;
 import com.adnangondal.posts.model.PostsResponseModel;
 import com.adnangondal.posts.repository.PostRepository;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,6 +31,21 @@ public class PostControllerIT {
 
   @Autowired
   private PostRepository postRepository;
+
+  @BeforeEach
+  public void setUp(){
+    postRepository.deleteAll();
+  }
+
+  @Test
+  public void testCreatePost() {
+    NewPostRequest post = NewPostRequest.builder().content("Hello World!").imageUrl("imageUrl").build();
+
+    ResponseEntity<Long> response = restTemplate.postForEntity("/api/posts/user/{userId}", post, Long.class, 1L);
+
+    assertEquals(HttpStatus.CREATED, response.getStatusCode());
+    Assertions.assertThat(postRepository.findAll()).hasSize(1);
+  }
 
 
   @Test

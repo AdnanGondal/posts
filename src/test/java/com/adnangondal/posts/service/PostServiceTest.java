@@ -90,4 +90,28 @@ class PostServiceTest {
             tuple(2L, "Test Post 2"));
   }
 
+  public void testGetPostByUserId() {
+    // Arrange
+    var postBuilder = Post.builder();
+
+    List<Post> mockPosts = List.of(
+            postBuilder.id(1L).content("Test Post 1").imageUrl("test1.jpg").userId(1L).build(),
+            postBuilder.id(2L).content("Test Post 2").userId(2L).build()
+    );
+
+    // Act
+    PostsResponseModel result = postsService.getAllPosts();
+
+    // Assert
+    assertThat(result.getPosts())
+            .hasSize(2)
+            .extracting("id", "content")
+            .containsExactly(
+                    tuple(1L, "Test Post 1"),
+                    tuple(2L, "Test Post 2"));
+
+
+
+  }
+
 }
