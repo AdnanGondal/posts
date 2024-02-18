@@ -67,7 +67,7 @@ class PostServiceTest {
 
   @Test
   public void testGetAllPosts() {
-    // ArrangeZZX
+    // Arrange
     var postBuilder = Post.builder();
 
     List<Post> mockPosts = List.of(

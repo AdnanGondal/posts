@@ -2,13 +2,12 @@ package com.adnangondal.posts.model;
 
 import com.adnangondal.posts.entity.Post;
 import java.util.List;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Singular;
+
+import lombok.*;
 
 @Data
-@NoArgsConstructor
+@RequiredArgsConstructor
+@Builder
 public class PostsResponseModel {
 
   @Singular

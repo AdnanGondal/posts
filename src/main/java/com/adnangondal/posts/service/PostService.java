@@ -22,9 +22,11 @@ public class PostService {
   }
 
   public PostsResponseModel getAllPosts() {
-   PostsResponseModel response = new PostsResponseModel();
-   response.setPosts(postRepository.findAll());
-   return response;
+   return PostsResponseModel.builder().posts(postRepository.findAll()).build();
+  }
+
+  public PostsResponseModel getPostByUserId(Long userId){
+    return PostsResponseModel.builder().posts(postRepository.findAllByUserId(userId)).build();
   }
 
 }
