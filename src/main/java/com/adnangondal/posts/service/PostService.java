@@ -5,7 +5,6 @@ import com.adnangondal.posts.mapper.PostMapper;
 import com.adnangondal.posts.model.NewPostRequest;
 import com.adnangondal.posts.model.PostsResponseModel;
 import com.adnangondal.posts.repository.PostRepository;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +24,7 @@ public class PostService {
    return PostsResponseModel.builder().posts(postRepository.findAll()).build();
   }
 
-  public PostsResponseModel getPostByUserId(Long userId){
+  public PostsResponseModel getPostsByUserId(Long userId){
     return PostsResponseModel.builder().posts(postRepository.findAllByUserId(userId)).build();
   }
 

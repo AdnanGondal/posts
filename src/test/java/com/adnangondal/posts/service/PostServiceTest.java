@@ -2,7 +2,6 @@ package com.adnangondal.posts.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.tuple;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -11,13 +10,12 @@ import com.adnangondal.posts.mapper.PostMapper;
 import com.adnangondal.posts.model.NewPostRequest;
 import com.adnangondal.posts.model.PostsResponseModel;
 import com.adnangondal.posts.repository.PostRepository;
-import java.util.ArrayList;
+
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -74,8 +72,6 @@ class PostServiceTest {
         postBuilder.id(1L).content("Test Post 1").imageUrl("test1.jpg").userId(1L).build(),
         postBuilder.id(2L).content("Test Post 2").userId(2L).build()
     );
-
-    // Mock the behavior of the PostRepository
     when(postRepository.findAll()).thenReturn(mockPosts);
 
     // Act
@@ -90,25 +86,25 @@ class PostServiceTest {
             tuple(2L, "Test Post 2"));
   }
 
+  @Test
   public void testGetPostByUserId() {
     // Arrange
     var postBuilder = Post.builder();
 
     List<Post> mockPosts = List.of(
-            postBuilder.id(1L).content("Test Post 1").imageUrl("test1.jpg").userId(1L).build(),
-            postBuilder.id(2L).content("Test Post 2").userId(2L).build()
+            postBuilder.id(1L).content("Test Post 1").imageUrl("test1.jpg").userId(1L).build()
     );
+    when(postRepository.findAllByUserId(any())).thenReturn(mockPosts);
 
     // Act
-    PostsResponseModel result = postsService.getAllPosts();
+    PostsResponseModel result = postsService.getPostsByUserId(1L);
 
     // Assert
     assertThat(result.getPosts())
-            .hasSize(2)
+            .hasSize(1)
             .extracting("id", "content")
             .containsExactly(
-                    tuple(1L, "Test Post 1"),
-                    tuple(2L, "Test Post 2"));
+                    tuple(1L, "Test Post 1"));
 
 
 

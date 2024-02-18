@@ -1,10 +1,8 @@
 package com.adnangondal.posts.controller;
 
-import com.adnangondal.posts.entity.Post;
 import com.adnangondal.posts.model.NewPostRequest;
 import com.adnangondal.posts.model.PostsResponseModel;
 import com.adnangondal.posts.service.PostService;
-import java.util.List;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +40,7 @@ public class PostsController {
 
   @GetMapping("/posts/user/{userId}")
   public ResponseEntity<PostsResponseModel> getPostsByUserId(@PathVariable("userId") Long userId){
-    PostsResponseModel posts = postService.getPostByUserId(userId);
+    PostsResponseModel posts = postService.getPostsByUserId(userId);
     return new ResponseEntity<>(posts, HttpStatus.OK);
   }
 
