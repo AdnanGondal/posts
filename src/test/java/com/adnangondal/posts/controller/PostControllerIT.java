@@ -39,7 +39,7 @@ public class PostControllerIT {
 
   @Test
   public void testCreatePost() {
-    NewPostRequest post = NewPostRequest.builder().content("Hello World!").imageUrl("imageUrl").build();
+    NewPostRequest post = NewPostRequest.builder().content("Hello World!").imageUrl("https://www.imageUrl.com").build();
 
     ResponseEntity<Long> response = restTemplate.postForEntity("/api/posts/user/{userId}", post, Long.class, 1L);
 

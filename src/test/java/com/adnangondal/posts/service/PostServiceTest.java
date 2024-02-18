@@ -3,6 +3,7 @@ package com.adnangondal.posts.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.tuple;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.adnangondal.posts.entity.Post;
@@ -105,8 +106,6 @@ class PostServiceTest {
             .extracting("id", "content")
             .containsExactly(
                     tuple(1L, "Test Post 1"));
-
-
 
   }
 

@@ -1,5 +1,6 @@
 package com.adnangondal.posts.controller;
 
+import com.adnangondal.posts.entity.Post;
 import com.adnangondal.posts.model.NewPostRequest;
 import com.adnangondal.posts.model.PostsResponseModel;
 import com.adnangondal.posts.service.PostService;
@@ -8,12 +9,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/")
@@ -42,6 +38,18 @@ public class PostsController {
   public ResponseEntity<PostsResponseModel> getPostsByUserId(@PathVariable("userId") Long userId){
     PostsResponseModel posts = postService.getPostsByUserId(userId);
     return new ResponseEntity<>(posts, HttpStatus.OK);
+  }
+
+  @GetMapping("/posts/{postId}")
+  public ResponseEntity<Post> getPostById(@PathVariable("postId") Long postId){
+    Post post = postService.getPostById(postId);
+    return new ResponseEntity<>(post, HttpStatus.OK);
+  }
+
+  @DeleteMapping("/posts/{postId}")
+  public ResponseEntity<Post> deletePostById(@PathVariable("postId") Long postId){
+   postService.deletePostById(postId);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 
 }
