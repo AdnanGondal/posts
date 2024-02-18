@@ -6,7 +6,8 @@ import java.util.List;
 import lombok.*;
 
 @Data
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class PostsResponseModel {
 
