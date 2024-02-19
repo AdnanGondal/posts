@@ -47,15 +47,16 @@ public class PostsController {
   }
 
   @DeleteMapping("/posts/{postId}")
-  public ResponseEntity<Post> deletePostById(@PathVariable("postId") Long postId){
+  public ResponseEntity<Void> deletePostById(@PathVariable("postId") Long postId){
    postService.deletePostById(postId);
-    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+   return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 
   @PutMapping("/posts/{postId}")
   public ResponseEntity<Long> updatePostById(@PathVariable("postId") Long postId,
                                           @Valid @RequestBody NewPostRequest request ){
-    return new ResponseEntity<>(postService.updatePostId(postId, request), HttpStatus.OK);
+    Long id = postService.updatePostId(postId, request);
+    return new ResponseEntity<>(id, HttpStatus.OK);
   }
 
 }

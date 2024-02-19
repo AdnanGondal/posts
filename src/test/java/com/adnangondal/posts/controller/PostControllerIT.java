@@ -83,6 +83,45 @@ public class PostControllerIT {
                     tuple("Hello World 2!", 1L , "url2"));
   }
 
+  @Test
+  public void testGetPostById() {
+    createMultiplePosts();
+
+    ResponseEntity<Post> response = restTemplate.getForEntity("/api/posts/1", Post.class);
+    Post post = Objects.requireNonNull(response.getBody());
+
+    assertEquals(HttpStatus.OK, response.getStatusCode());
+
+    assertEquals(post.getId(), 1L);
+  }
+
+  @Test
+  public void testDeletePost(){
+    createMultiplePosts();
+
+    restTemplate.delete("/api/posts/1");
+
+    List<Post> posts = postRepository.findAll();
+
+    Assertions.assertThat(posts)
+            .hasSize(2);
+
+  }
+
+  @Test
+  public void testUpdatePost(){
+    createMultiplePosts();
+    String newPostContent = "Hello World Changed";
+
+    NewPostRequest postChange = NewPostRequest.builder().content(newPostContent).imageUrl("https://www.imageUrl.com").build();
+
+    restTemplate.put("/api/posts/1", postChange);
+
+    Post post = postRepository.findById(1L).get();
+    assertEquals(newPostContent, post.getContent());
+    assertThat(post.getUpdatedDate()).isAfter(post.getCreatedDate());
+  }
+
   private void createMultiplePosts() {
     var postBuilder = Post.builder();
     Post post1 =

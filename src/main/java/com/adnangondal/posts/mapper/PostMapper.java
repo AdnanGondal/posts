@@ -17,6 +17,7 @@ public interface PostMapper {
   @Mapping(target = "createdDate", expression = "java(java.time.LocalDateTime.now())")
   Post mapToEntity(NewPostRequest request, Long userId);
 
+  @Mapping(target = "updatedDate", expression = "java(java.time.LocalDateTime.now())")
  void updatePostFromRequest(NewPostRequest postRequest, @MappingTarget Post entity);
 
 }
