@@ -1,14 +1,14 @@
 package com.adnangondal.posts.repository;
 
-import com.adnangondal.posts.entity.Post;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
+import com.adnangondal.posts.entity.Post;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    List<Post> findAllByUserId(Long userId);
+  List<Post> findAllByUserId(Long userId);
 }

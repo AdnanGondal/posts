@@ -11,16 +11,25 @@ can create a new post
 GET /api/v1/posts - DONE
 get all posts on the platform. 
 
-GET /api/v1/posts/user/{userId}
+GET /api/v1/posts/user/{userId} - DONE
 get all posts, for a given user id. 
+Empty string if not found
 
-POST /api/v1/post/users
-get posts for multiple users- a list of userIds
+GET /api/v1/posts?users={userIds} - TO DO
+get all posts, for a list of user Ids (Ie frinds list)
 
-GET /api/v1/post/{postId}
-get a given post
+GET /api/v1/posts/{postId}
+get a given post for id, or return error
 
-DELETE /api/v1/post/{postId}
+PUT /api/v1/posts/{postId}
+update post by ID
+
+DELETE /api/v1/posts/{postId}
 delete post by postID
 
 Using an in memory H2 database for now.
+
+Otherbacklog:
+- Exception handling
+- Securing API endpoints
+- Setup code clean and formatting tool

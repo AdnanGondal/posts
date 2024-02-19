@@ -1,7 +1,9 @@
 package com.adnangondal.posts.entity;
 
+import java.time.LocalDateTime;
 
 import com.adnangondal.posts.model.Status;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,12 +13,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 
 @Entity
 @NoArgsConstructor
@@ -44,5 +44,4 @@ public class Reaction {
   private LocalDateTime createdDate;
 
   private LocalDateTime updatedDate;
-
 }

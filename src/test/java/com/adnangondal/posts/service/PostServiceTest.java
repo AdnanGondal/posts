@@ -1,16 +1,5 @@
 package com.adnangondal.posts.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.tuple;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
-import com.adnangondal.posts.entity.Post;
-import com.adnangondal.posts.mapper.PostMapper;
-import com.adnangondal.posts.model.NewPostRequest;
-import com.adnangondal.posts.model.PostsResponseModel;
-import com.adnangondal.posts.repository.PostRepository;
-
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -19,13 +8,22 @@ import org.mapstruct.factory.Mappers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.adnangondal.posts.entity.Post;
+import com.adnangondal.posts.mapper.PostMapper;
+import com.adnangondal.posts.model.NewPostRequest;
+import com.adnangondal.posts.model.PostsResponseModel;
+import com.adnangondal.posts.repository.PostRepository;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.tuple;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
 class PostServiceTest {
 
-  @Mock
-  private PostRepository postRepository;
+  @Mock private PostRepository postRepository;
 
   private PostMapper postMapper = Mappers.getMapper(PostMapper.class);
-
 
   private PostService postsService;
 
@@ -40,11 +38,8 @@ class PostServiceTest {
   @Test
   public void testCreatePost() {
     // Arrange
-    NewPostRequest request = NewPostRequest
-        .builder()
-        .content("Hello World")
-        .imageUrl("imageUrl.com")
-        .build();
+    NewPostRequest request =
+        NewPostRequest.builder().content("Hello World").imageUrl("imageUrl.com").build();
     Long userId = 1L;
 
     Post createdPost = new Post();
@@ -68,10 +63,10 @@ class PostServiceTest {
     // Arrange
     var postBuilder = Post.builder();
 
-    List<Post> mockPosts = List.of(
-        postBuilder.id(1L).content("Test Post 1").imageUrl("test1.jpg").userId(1L).build(),
-        postBuilder.id(2L).content("Test Post 2").userId(2L).build()
-    );
+    List<Post> mockPosts =
+        List.of(
+            postBuilder.id(1L).content("Test Post 1").imageUrl("test1.jpg").userId(1L).build(),
+            postBuilder.id(2L).content("Test Post 2").userId(2L).build());
     when(postRepository.findAll()).thenReturn(mockPosts);
 
     // Act
@@ -81,9 +76,7 @@ class PostServiceTest {
     assertThat(result.getPosts())
         .hasSize(2)
         .extracting("id", "content")
-        .containsExactly(
-            tuple(1L, "Test Post 1"),
-            tuple(2L, "Test Post 2"));
+        .containsExactly(tuple(1L, "Test Post 1"), tuple(2L, "Test Post 2"));
   }
 
   @Test
@@ -91,9 +84,8 @@ class PostServiceTest {
     // Arrange
     var postBuilder = Post.builder();
 
-    List<Post> mockPosts = List.of(
-            postBuilder.id(1L).content("Test Post 1").imageUrl("test1.jpg").userId(1L).build()
-    );
+    List<Post> mockPosts =
+        List.of(postBuilder.id(1L).content("Test Post 1").imageUrl("test1.jpg").userId(1L).build());
     when(postRepository.findAllByUserId(any())).thenReturn(mockPosts);
 
     // Act
@@ -101,13 +93,8 @@ class PostServiceTest {
 
     // Assert
     assertThat(result.getPosts())
-            .hasSize(1)
-            .extracting("id", "content")
-            .containsExactly(
-                    tuple(1L, "Test Post 1"));
-
-
-
+        .hasSize(1)
+        .extracting("id", "content")
+        .containsExactly(tuple(1L, "Test Post 1"));
   }
-
 }

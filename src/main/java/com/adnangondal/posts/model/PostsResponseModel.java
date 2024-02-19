@@ -1,7 +1,8 @@
 package com.adnangondal.posts.model;
 
-import com.adnangondal.posts.entity.Post;
 import java.util.List;
+
+import com.adnangondal.posts.entity.Post;
 
 import lombok.*;
 
@@ -11,7 +12,5 @@ import lombok.*;
 @Builder
 public class PostsResponseModel {
 
-  @Singular
-  List<Post> posts;
-
+  @Singular List<Post> posts;
 }
