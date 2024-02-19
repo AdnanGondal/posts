@@ -1,12 +1,12 @@
 package com.adnangondal.posts.mapper;
 
-import com.adnangondal.posts.entity.Post;
-import com.adnangondal.posts.model.NewPostRequest;
-import com.adnangondal.posts.model.PostsResponseModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.springframework.stereotype.Component;
+
+import com.adnangondal.posts.entity.Post;
+import com.adnangondal.posts.model.NewPostRequest;
 
 @Mapper(componentModel = "spring")
 @Component
@@ -18,6 +18,5 @@ public interface PostMapper {
   Post mapToEntity(NewPostRequest request, Long userId);
 
   @Mapping(target = "updatedDate", expression = "java(java.time.LocalDateTime.now())")
- void updatePostFromRequest(NewPostRequest postRequest, @MappingTarget Post entity);
-
+  void updatePostFromRequest(NewPostRequest postRequest, @MappingTarget Post entity);
 }
