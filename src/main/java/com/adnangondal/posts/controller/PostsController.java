@@ -52,4 +52,10 @@ public class PostsController {
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 
+  @PutMapping("/posts/{postId}")
+  public ResponseEntity<Long> updatePostById(@PathVariable("postId") Long postId,
+                                          @Valid @RequestBody NewPostRequest request ){
+    return new ResponseEntity<>(postService.updatePostId(postId, request), HttpStatus.OK);
+  }
+
 }

@@ -42,4 +42,13 @@ public class PostService {
    postRepository.deleteById(postId);
   }
 
+  public Long updatePostId(Long postId, NewPostRequest updatedPost){
+   return postRepository.findById(postId).map(
+           post -> {
+             postMapper.updatePostFromRequest(updatedPost, post);
+             return postRepository.save(post).getId();
+           }
+   ).orElseThrow(() -> new PostNotFoundException(postId));
+  }
+
 }
